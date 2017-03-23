@@ -1,0 +1,24 @@
+<h1>MEAL REGISTER</h1>
+<%= form_for(@lunchdetail)do |f| %>
+<P>
+	<%= f.label :Name %>
+	<%= f.text_field :name %>
+</P>
+<p>
+	<%= f.label :Date %>
+	<%= f.text_field :date %>
+</p>
+<p>
+	<%= f.label :Had_Lunch %>
+	<%= f.select :had_lunch, [ 'Yes','No' ], :prompt => 'Select One' %>
+</p>
+<p>
+	<%= f.label :Cost_of_meal %>
+	<%= f.select :cost_of_meal, [ 'date','amount','restaurant_name' ] %>
+</p>	
+<p>
+	<%= button_tag "Save" %>
+	<%= button_tag "delete" %>	
+</p>
+<% end %>
+

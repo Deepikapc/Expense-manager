@@ -1,0 +1,2 @@
+module DailyInvoicesHelper
+end

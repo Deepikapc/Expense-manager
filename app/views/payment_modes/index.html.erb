@@ -1,0 +1,34 @@
+  <h1>
+			List of Payment Modes
+		</h1>
+	<table class="table table-bordered">
+	 <thead>
+    <tr>
+        <th>Payment_gateway</th>
+		<th>created_at</th>
+		<th>updated_at</th>
+	</tr>
+	</thead>
+	<tbody>
+		<% @paymentmodes.each do |paymentmode| %>
+		<tr>
+			<td>
+				<%= paymentmode.payment_gateway %>
+			</td>
+			<td>
+				<%= paymentmode.created_at %>
+			</td>
+			<td>
+				<%= paymentmode.updated_at %>
+			</td>
+			
+			<td><%= link_to 'Destroy', payment_mode_path(paymentmode),:method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+			</tr>
+
+		<% end %>
+		
+	</tbody>
+	</table>	
+	<p>
+		<%= link_to 'New payment Mode', new_payment_mode_path, :class => "btn btn-primary"%>
+	</p>

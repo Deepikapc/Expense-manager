@@ -1,0 +1,20 @@
+<p>
+	<strong>Restaurant Name</strong>
+	<%= @dailyinvoice.restaurant_name %>
+</p>
+<p>
+	<strong>Amount</strong>
+	<%= @dailyinvoice.amount %>
+</p>
+<p>
+	<strong>Date</strong>
+	<%= @dailyinvoice.date%>
+</p>
+<p>
+	<strong>Bill_image_path</strong>
+	<%= @dailyinvoice.image%>
+</p>
+<%#= link_to image_tag(photo.image.url) %>
+<%= link_to 'Edit', edit_daily_invoice_path(@dailyinvoice) %> |
+
+ <%= link_to 'Back', daily_invoices_path %>

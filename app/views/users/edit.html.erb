@@ -1,0 +1,48 @@
+	<%= form_for(@user)do |f| %>
+	<div class="form-group">
+    <%if @user.errors.any? %>
+	<div id="error_explaination">
+		<h2><%= pluralize(@user.errors.count,"error") %> prohibited this user from being saved:</h2>
+		<ul>
+			<% @user.errors.full_messages.each do |message| %>
+			<li><%= message %>
+			</li>
+			<% end %>
+		</ul>	
+	</div>
+	</div>
+	<% end %>
+	
+	<fieldset>	
+	<legend>
+			<h1>Editing User</h1>
+	</legend> 
+
+	  <div class="form-group">
+     <%= f.label :Name %>
+      <%= f.text_field  :name ,:class =>'form-control'%>
+    </div>
+	   <div class="form-group">
+    <%= f.label :Email %>
+       <%= f.text_field  :email ,:class =>'form-control'%>
+  </div>
+	  
+	  <div class="form-group">
+    <%= f.label :Cost_of_meal %>
+      <%= f.text_field :cost_of_meal, :onkeypress=> "return isNumberKey(event)",:class => 'form-control'%>
+  </div>
+	 <button type="save" class="btn btn-success btn-cons">Save</button>
+	 <%= link_to 'Cancel', users_path, :class => "btn btn-danger btn-cons" %>
+	  </fieldset>	
+	<%end%>
+  <script type="text/javascript">
+      function isNumberKey(evt)
+      {
+          var charCode = (evt.which) ? evt.which : event.keyCode
+          if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+              alert("Please Enter Only Numeric Value:");
+              return false;
+          }
+          return true;
+      }
+  </script>

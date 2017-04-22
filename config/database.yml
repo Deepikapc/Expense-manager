@@ -12,7 +12,7 @@ development:
   encoding: utf8
   database: expensemanager
   username: root
-  password: qazplm123
+  password: root
   host: 127.0.0.1
   port: 3306
 

@@ -1,17 +1,40 @@
-     <p>
-	  <strong>Restaurant_Name:</strong>
-	  <%= @dailyinvoice.restaurant_name %>
-	</p>
-	<p>
-	  <strong>Amount:</strong>
-	  <%= @dailyinvoice.amount %>
-	</p>
-	<p>
-	  <strong>Date:</strong>
-	  <%= @dailyinvoice.date %>
-	</p>
-	<%= link_to 'Edit', edit_daily_invoice_path(@dailyinvoice) %> |
-	<%= link_to 'Back', daily_invoices_path %>
-	
-<%=select_tag 'lunch_detail_id', options_for_select(DailyInvoice.all.collect{ |u| [u.date, u.id]} ),{:include_blank => true,:onchange => "callMe(this.value)"}%>
+<div class="col-md-6 col-md-offset-3">
+  <h1>Expense Detail</h1>
+<table class="table table-hover">
+  <tbody>
+  <tr>
+    <th>Bill Date</th>
+    <td><%= @daily_invoice.date.strftime("%d-%m-%Y")%> </td>
+  </tr>
+  <tr>
+    <th>Users</th>
+    <td><%= @users %> </td>
+  </tr>
+  <tr>
+    <th>Dates</th>
+    <td><%= @dates %> </td>  </tr>
+  <tr>
+    <th>Restaurant Name</th>
+    <td><%= @daily_invoice.restaurant_name %></td>
+  </tr>
+  <tr>
+    <th>Had Meal</th>
+    <td><%= @expense_array.first.had_lunch? ? 'Yes' : 'No' %></td>
+  </tr>
+  <tr>
+    <th>Amount</th>
+    <td><%= @daily_invoice.amount %></td>
+  </tr>
+  <tr>
+    <th>Type</th>
+    <td><%= @expense_array.first.type %></td>
+  </tr>
+  <tr>
+    <th>Download</th>
+    <td><%= link_to "ViewBill", @daily_invoice.image.url, download: "ViewBill" %></td>
+  </tr>
+  </tbody>
+</table>
+<%= link_to 'Back', daily_invoices_path, class: "btn btn-danger btn-cons" %>
 
+</div>

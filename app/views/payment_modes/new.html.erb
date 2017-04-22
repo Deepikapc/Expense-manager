@@ -1,14 +1,16 @@
-<div class="panel panel-danger">
-  <div class="panel-heading">Payment Modes </div>
-  <div class="panel-body">
-  <%= form_for (@paymentmode) do |f| %>
-	<div class="form-group">
-	<%= f.label :payment_gateway %>
-    <%= f.text_field  :payment_gateway ,:class => 'form-control',:id => 'paymentgateway' %>
+<div class="col-md-10 col-md-offset-1">
+  <div class="panel panel-danger">
+    <div class="panel-heading">Payment Modes</div>
+    <div class="panel-body">
+      <%= form_for (@paymentmode) do |f| %>
+          <div class="form-group">
+            <%= f.label :payment_gateway %>
+            <%= f.text_field :payment_gateway, :class => 'form-control', :id => 'paymentgateway' %>
+          </div>
+
+          <button type="save" class="btn btn-success btn-cons">Save</button>
+          <%= link_to 'Cancel', payment_modes_path, :class => "btn btn-danger btn-cons" %>
+      <% end %>
     </div>
-	
-	<button type="save" class="btn btn-success btn-cons">Save</button>
-    <%= link_to 'Cancel', payment_modes_path, :class => "btn btn-danger btn-cons" %>
-	<% end %>
   </div>
 </div>

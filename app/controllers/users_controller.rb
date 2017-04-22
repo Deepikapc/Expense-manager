@@ -27,7 +27,7 @@
      def show
       @user=User.find(params[:id])
     end
-    def month_details
+    def user_month_details
       @users=User.all
     end
     def month_info
@@ -35,8 +35,8 @@
        @user=User.find(params[:user_id])
        @end_date=params[:date]
        @start_date=Date.parse(@end_date).beginning_of_month
-       @lunchdetails=LunchDetail.where(had_lunch: true, user_id: params[:user_id]).where(date: "#{@start_date}".."#{@end_date}")
-       @total=@user.cost_of_meal*@lunchdetails.count
+       @expensedetails=Expense.where(had_lunch: true, user_id: params[:user_id]).where(date: "#{@start_date}".."#{@end_date}")
+       @total=@user.cost_of_meal*@expensedetails.count
     end
      def destroy
        @user=User.find(params[:id])

@@ -21,6 +21,7 @@
 //= require bootstrap-select
 //= require bootstrap-multiselect
 //= require bootstrap3-editable/bootstrap-editable
+//= require jquery-ui.multidatespicker
 
 //= require_tree .
 

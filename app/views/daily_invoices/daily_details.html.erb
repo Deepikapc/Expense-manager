@@ -1,4 +1,5 @@
-  <div class="panel panel-danger">
+<div class="col-md-10 col-md-offset-1">
+<div class="panel panel-success">
     <div class="panel-heading">Daily Details</div>
     <div class="panel-body">
       <%= form_tag('/daily_details') do %>
@@ -98,7 +99,7 @@
             </tr>
             </thead>
             <tbody>
-            <% lunch_details = LunchDetail.where("lunch_details.date =?",@vardate) %>
+            <% lunch_details = Expense.where("expenses.date =?",@vardate) %>
             <% lunch_details.each do |lunch_detail| %>
                 <tr>
                   <td>
@@ -135,6 +136,7 @@
           </table>
       <% end %>
       </div>
+  </div>
   </div>
   <script type="text/javascript">
       $(document).ready(function() {

@@ -1,0 +1,27 @@
+<div class="col-md-10 col-md-offset-1">
+  <p>
+    <strong>user:</strong>
+    <%= f.select 'user_id', options_for_select(@users.collect {|u| [u.name, u.id]}) %>
+  </p>
+  <p>
+    <strong>Amount_paid:</strong>
+    <%= f.text_field :amount_paid %>
+  </p>
+  <p>
+    <strong>Payment_gateway:</strong>
+    <%= f.select 'payment_mode_id', options_for_select(@paymentmodes.collect {|u| [u.payment_gateway, u.id]}) %>
+  </p>
+  <p>
+    <strong>Date:</strong>
+    <%= f.text_field :date %>
+  </p>
+
+  <p>
+    <strong>Comment:</strong>
+    <%= f.text_field :comment %>
+  </p>
+
+  <p>
+    <%= link_to 'Back', user_payments_path %>
+  </p>
+</div>

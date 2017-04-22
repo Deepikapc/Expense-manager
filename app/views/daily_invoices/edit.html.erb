@@ -1,0 +1,15 @@
+<div class="col-md-10 col-md-offset-1">
+  <div class="panel panel-danger">
+    <div class="panel-heading">Edit Expense Register</div>
+    <div class="panel-body">
+      <div class="row">
+        <!--Daily Invoices starts-->
+        <%= form_for @daily_invoice, url: daily_invoice_path(@daily_invoice), method: "patch" do |f| %>
+            <% render partial: 'form', locals: {f: f} %>
+        <% end %>
+        <!--Daily Invoices ends-->
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,67 @@
+<h1> Meal Cost</h1>
+<table>
+	<tr>
+		<th>Restaurant Name</th>
+		<th>Amount</th>
+		<th>Date</th>
+		<th>Image</th>
+	</tr>
+	<% @dailyinvoices.each do |dailyinvoice| %>
+	<tr>
+		<td>
+			<%= dailyinvoice.restaurant_name %>
+		</td>
+		<td>
+			<%= dailyinvoice.amount %>
+		</td>
+		<td>
+			<%= dailyinvoice.date %>
+		</td>
+		<td>
+			<%= dailyinvoice.image %>
+		</td>
+		
+		<%= image_tag(dailyinvoice.image.url) %>
+		
+		<td><%= link_to 'Edit', edit_daily_invoice_path(dailyinvoice) %></td>
+		<td><%= link_to 'Destroy', daily_invoice_path(dailyinvoice),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>		
+	</tr>
+	<% end  %>
+</table>
+
+
+<p>
+	<%= collection_select :daily_invoice_id, @dailyinvoices.order(:date),:id,:date, include_blank: true  %>
+	
+</p>
+
+<p>
+<%= form_for(@dailyinvoices)do |f| %>
+</p>
+<p>
+	<%= f.label :Meal_Details %><br>
+	<%= f.text_field :meal_details%>
+</p>
+<p>
+	<%= f.label :Hotel %><br>
+	<%= f.text_field :hotel%>
+</p>
+<p>
+	<%= f.label :Amount %><br>
+	<%= f.text_field :amount%>
+</p>
+<p>
+	<%= f.label :Date %><br>
+	<%= f.text_field :date%>
+</p>
+<p>
+	<%= f.label :Bill %><br>
+	<%= f.text_field :bill %>
+</p>
+<% end %>
+
+
+
+

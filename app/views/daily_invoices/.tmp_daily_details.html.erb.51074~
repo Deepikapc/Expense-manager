@@ -1,0 +1,9 @@
+<p>
+	<%= f.label :Date %><br>
+	<%= f.text_field :date %>
+</p>
+<p>
+    <%= button_tag "Submit"%>
+</p>
+	
+	

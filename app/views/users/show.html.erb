@@ -1,0 +1,18 @@
+<div class="col-md-10 col-md-offset-1">
+  <p>
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </p>
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
+  <p>
+    <strong>Cost of meal:</strong>
+    <%= @user.cost_of_meal %>
+  </p>
+  <p>
+    <%= link_to 'Edit', edit_user_path(@user) %> |
+    <%= link_to 'Back', users_path %>
+  </p>
+</div>

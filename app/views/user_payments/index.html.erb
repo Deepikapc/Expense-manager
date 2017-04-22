@@ -1,0 +1,33 @@
+<div class="col-md-10 col-md-offset-1">
+  <h1>List Of User Payments</h1>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>User</th>
+      <th>Amount_Paid</th>
+      <th>Payment_Gateway</th>
+      <th>Date</th>
+      <th>Comment</th>
+      <th>created_at</th>
+      <th>updated_at</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @userpayments.each do |userpayment| %>
+        <tr>
+          <td><%= userpayment.user.name %></td>
+          <td><%= userpayment.amount_paid %></td>
+          <td><%= userpayment.payment_mode.payment_gateway %></td>
+          <td><%= userpayment.date %></td>
+          <td><%= userpayment.comment %></td>
+          <td><%= userpayment.created_at %></td>
+          <td><%= userpayment.updated_at %></td>
+          <td><%= link_to 'Destroy', user_payment_path(userpayment), :method => :delete, :data => {:confirm => 'Are you sure?'} %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <p>
+    <%= link_to 'New UserPayment', new_user_payment_path, :class => "btn btn-primary" %>
+  </p>
+</div>

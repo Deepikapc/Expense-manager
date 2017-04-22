@@ -1,0 +1,108 @@
+<div class="col-md-10 col-md-offset-1">
+  <h1>Expense Details</h1>
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          Filter
+          <div class="pull-right" data-toggle="collapse" data-target="#demo">
+            <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></div>
+        </h4>
+      </div>
+
+      <div id="demo" class="panel-body collapse panel-collapse">
+        <%= form_tag(daily_invoices_path, :method => "get", id: "filter-form") do %>
+            <div class="row">
+              <div class="col-xs-12 filter-label">
+                <label for="type">Types:</label>
+                <% Expense::EXPENSE_TYPES.each do |type| %>
+                    <% @expense_checked = params[:type_ids] %>
+                    <div class="checkbox-inline filter-type">
+                      <% if params[:type_ids].present? && (params[:type_ids].include? type.to_s) %>
+                          <%= check_box_tag "type_ids[]", type, @expense_checked %>
+                      <% else %>
+                          <%= check_box_tag "type_ids[]", type %>
+                      <% end %>
+                      <%= type %>
+                    </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-5 filter-label">
+                <label for="date">Date:</label>
+                <div class="checkbox-inline filter-date">
+                  <input type="text" name="date" value="<%= params[:date] %>" class="date"/>
+                </div>
+              </div>
+            </div>
+            <div clas="clearfix"></div>
+            <br/>
+            <div class="row">
+              <div class="col-xs-12 form-group filter-label pull-left">
+                <%= submit_tag "Apply", name: nil, class: "btn btn-success btn-cons" %>
+                <%= link_to 'Cancel', daily_invoices_path, class: "btn btn-danger btn-cons" %>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="pull-left">
+          <%= link_to 'Add Expense', new_daily_invoice_path, :class => "btn btn-primary" %>
+        </div>
+        <div class="clearfix"></div>
+        <p></p>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Bill Date</th>
+              <th>Restaurant Name</th>
+              <th>Amount</th>
+              <th>Type</th>
+              <th>Download</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @daily_invoices.each do |dailyinvoice| %>
+                <tr>
+                  <td><%= link_to dailyinvoice.date.strftime("%d-%m-%Y"), daily_invoice_path(dailyinvoice) %> </td>
+                  <td><%= dailyinvoice.restaurant_name %></td>
+                  <td><%= dailyinvoice.amount %></td>
+                  <td><%= dailyinvoice.expenses.first.type rescue nil %></td>
+                  <td><%= link_to "ViewBill", dailyinvoice.image.url, download: "ViewBill" %></td>
+                  <td><%= link_to 'Show', daily_invoice_path(dailyinvoice) %>
+                    | <%#= link_to 'Edit', edit_daily_invoice_path(dailyinvoice) %> |
+                    <%= link_to 'Destroy', daily_invoice_path(dailyinvoice), :method => :delete, :data => {:confirm => 'Are you sure?'} %></td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+        <% if @daily_invoices.blank? %>
+            <div id="error_explaination">
+              <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <p class="text-center"> No records were found </p>
+              </div>
+            </div>
+        <% end %>
+        <div class="text-center"><%= will_paginate @daily_invoices, renderer: BootstrapPagination::Rails %></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".date").datepicker({dateFormat: "yy-mm-dd"});
+    });
+</script>
+
+

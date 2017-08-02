@@ -1,10 +1,15 @@
-  class DailyInvoice < ApplicationRecord
-    has_one :lunch_detail
-    #belongs_to :user
-    validates_presence_of :restaurant_name
-    validates_presence_of :amount
-    validates_presence_of :date
-    has_attached_file :image
-    validates_attachment :image, :content_type => { :content_type => ["image/jpeg","image/gif","image/png"] }
-    #accepts_nested_attributes_for :lunch_details
-  end
+class DailyInvoice < ApplicationRecord
+  acts_as_paranoid
+
+  has_many :expenses, :dependent => :destroy
+
+  validates_presence_of :restaurant_name
+  validates_presence_of :amount
+  validates_presence_of :date
+
+  has_attached_file :image
+
+  do_not_validate_attachment_file_type :image
+  accepts_nested_attributes_for :expenses
+
+end

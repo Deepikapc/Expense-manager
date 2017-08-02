@@ -1,50 +1,56 @@
-  <div class="panel panel-danger">
-    <div class="panel-heading">Add New User</div>
-    <div class="panel-body">
-  <%= form_for(@user)do |f| %>
-      <%if @user.errors.any? %>
-  <div id="error_explaination">
-      <h2><%= pluralize(@user.errors.count,"error") %> prohibited this user from being saved:</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %>
-        </li>
-        <% end %>
-      </ul>
-    </div>
-    <% end %>
-       <div class="form-group">
-       <%= f.label :Name %>
-         <%= f.text_field  :name ,:class =>'form-control'%>
-      </div>
-     <div class="form-group">
-      <%= f.label :Email %>
-       <%= f.text_field  :email ,:class =>'form-control'%>
-    </div>
+<div class="col-xs-12">
+  <div class="card">
+    <div class="header">Add New User</div>
+    <div class="body">
+      <%= form_for @user, html: { id: "userform" } do |f| %>
+          <% if @user.errors.any? %>
+              <div id="error_explaination">
+                <div class="alert alert-danger">
+                  <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+                </div>
+                <ul>
+                  <% @user.errors.full_messages.each do |message| %>
+                      <li><%= message %>
+                      </li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+          <div class="form-group ">
+            <div class="form-line">
+            <%= f.label :Name %>
+            <%= f.text_field :name, :class => 'form-control required' %>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-line">
+            <%= f.label :Email %>
+            <%= f.text_field :email, :class => 'form-control required' %>
+            </div>
+          </div>
 
-      <div class="form-group">
-      <%= f.label :Cost_of_meal %>
-        <%#= f.text_field  :cost_of_meal ,:class =>'form-control'%>
-        <%= f.text_field :cost_of_meal, :onkeypress=> "return isNumberKey(event)",:class => 'form-control'%>
-    </div>
-     <button type="save" class="btn btn-success btn-cons">Save</button>
-     <%= link_to 'Cancel', users_path, :class => "btn btn-danger btn-cons" %>
-    <% end %>
+          <div class="form-group">
+            <div class="form-line">
+            <%= f.label :Cost_of_meal %>
+            <%= f.text_field :cost_of_meal, :onkeypress => "return isNumberKey(event)", :class => 'form-control required' %>
+            </div>
+          </div>
+          <button type="save" class="btn btn-success btn-cons">Save</button>
+          <%= link_to 'Cancel', users_path, :class => "btn btn-danger btn-cons" %>
+      <% end %>
     </div>
   </div>
-
-  <script type="text/javascript">
-      function isNumberKey(evt)
-      {
-          var charCode = (evt.which) ? evt.which : event.keyCode
-          if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-              alert("Please Enter Only Numeric Value:");
-              return false;
-          }
-          return true;
-      }
-    </script>
-
+</div>
+<script type="text/javascript">
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            alert("Please Enter Only Numeric Value:");
+            return false;
+        }
+        return true;
+    }
+</script>
 
 
 

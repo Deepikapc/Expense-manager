@@ -5,8 +5,7 @@ jQuery ->
    $('#daily_invoice_date').datepicker({
     dateFormat: "yy-mm-dd"
   })
-  
+
   $('#exampleInputdate').datepicker({
     dateFormat: "yy-mm-dd"
   })
- 

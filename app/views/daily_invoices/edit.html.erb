@@ -1,23 +1,15 @@
-<h1>Editing Meal Cost</h1>
-<%= form_for(@dailyinvoice)do |f| %>
- <div class="form-group">
-     <%= f.label :Restaurant_Name %>
-   <%= f.text_field  :restaurant_name ,:class => 'form-control' %>
+<div class="col-xs-12">
+  <div class="card">
+    <div class="header">Edit Expense Register</div>
+    <div class="body">
+      <div class="row">
+        <!--Daily Invoices starts-->
+        <%= form_for @daily_invoice, url: daily_invoice_path(@daily_invoice), method: "patch" do |f| %>
+            <% render partial: 'form', locals: {f: f} %>
+        <% end %>
+        <!--Daily Invoices ends-->
+      </div>
     </div>
-   <div class="form-group">
-    <%= f.label :Amount %>
-     <%= f.text_field :amount ,:class => 'form-control' %>
-    </div>
-   <div class="form-group">
-    <%= f.label :Date %>
-     <%= f.text_field :date ,:class => 'form-control' %>
-    </div>
-	<div class="form-group">
-    <%= f.label :Bill %>
-    <%= f.file_field :image ,:class => 'form-control' %>
-    </div>
-
-		
-   <button type="save" class="btn btn-success btn-cons">Save</button>
-   <%= link_to 'Cancel', daily_invoices_path, :class => "btn btn-danger btn-cons" %>
-<% end %>
+  </div>
+</div>
+</div>

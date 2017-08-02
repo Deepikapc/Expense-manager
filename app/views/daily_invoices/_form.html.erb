@@ -1,0 +1,97 @@
+<% if @daily_invoice.errors.any? %>
+    <div id="error_explaination">
+      <h2><%= pluralize(@daily_invoice.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% @daily_invoice.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+<div class="col-xs-6">
+  <div class="form-group ">
+    <div class="form-line">
+    <%= f.label :Restaurant_Name %>
+    <%= f.text_field :restaurant_name, class: 'form-control', required: true %>
+    </div>
+  </div>
+  <div class="help-block with-errors"></div>
+  <div class="form-group">
+    <div class="form-line">
+    <%= f.label :Amount %>
+    <%= f.text_field :amount, class: 'form-control', required: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-xs-5">
+        <div class="demo-google-material-icon">
+            <%= f.label :Bill_Date %>
+            <span class="icon-name"><i class="material-icons", id="cal1", style = "position: absolute; margin-top: -3px;">date_range</i></span>
+            <%= f.text_field :date, class: 'form-control bill_date', required: true %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :Bill %>
+    <%= f.file_field :image, class: 'form-control' %>
+  </div>
+</div>
+
+<!--Expense Details starts-->
+<%= f.fields_for :expense do |l| %>
+    <div class="col-sm-6">
+      <%= l.hidden_field :daily_invoice_id %>
+      <div class="form-group">
+        <div class="checkboxinline">
+          <%= l.label :Users %></br>
+          <% User.all.each do |c| %>
+              <%= check_box_tag "daily_invoice[expense][user_ids][#{c.id}]", c.id, @daily_invoice.expenses.collect{|x|x.user_id}.include?(c.id), class: "filled-in" %>
+              <%= label_tag "daily_invoice[expense][user_ids][#{c.id}]", c.name %>
+          <% end %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="demo-google-material-icon">
+                <%= l.label :Date %>
+                <i class="material-icons", id="cal2", style = "position: absolute; margin-top: -3px;">date_range</i>
+                <span class="icon-name"></span>
+                <%= l.text_field :date, class: 'form-control date', required: true %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= l.label :Had_Lunch, style: "margin-right: 15px;" %>
+        <%= l.select :had_lunch, options_for_select({'Yes': '1', 'No':'0'}), {class: 'form-control', id: 'hadlunch'} %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-xs-5">
+            <%= l.label :Type, style: "margin-right: 15px;" %>
+            <%= l.select :type, options_for_select(Expense::TYPES), { id: 'type'} %>
+        </div>
+      </div>
+    </div>
+    <div class="form-group text-center">
+      <%= button_tag "Save", class: "btn btn-success btn-cons" %></button>
+      <%= link_to 'Cancel', daily_invoices_path, class: "btn btn-danger btn-cons" %>
+    </div>
+<% end %>
+
+<!--Expense Details ends-->
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#cal1').click(function(){
+        $(".bill_date").datepicker({dateFormat: "yy-mm-dd"}).focus();
+      });
+    $('#cal2').click(function(){
+      $(".date").multiDatesPicker({dateFormat: "yy-mm-dd"}).focus();
+    });
+  });
+</script>

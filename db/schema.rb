@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104174600) do
-
-  create_table "bill_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-  end
+ActiveRecord::Schema.define(version: 20170321065417) do
 
   create_table "daily_invoices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "restaurant_name"
@@ -32,17 +23,37 @@ ActiveRecord::Schema.define(version: 20161104174600) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.string   "lunch_detail_id"
-    t.string   "integer"
+    t.integer  "lunch_detail_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_daily_invoices_on_deleted_at", using: :btree
   end
 
-  create_table "lunch_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "expenses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.date     "date"
     t.integer  "user_id"
     t.integer  "daily_invoice_id"
     t.boolean  "had_lunch"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "type"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_expenses_on_deleted_at", using: :btree
+  end
+
+  create_table "payment_modes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "payment_gateway"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "user_payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "user_id"
+    t.float    "amount_paid",     limit: 24
+    t.string   "comment"
+    t.date     "date"
+    t.integer  "payment_mode_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -51,7 +62,6 @@ ActiveRecord::Schema.define(version: 20161104174600) do
     t.integer  "cost_of_meal"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.string   "integer"
   end
 
 end

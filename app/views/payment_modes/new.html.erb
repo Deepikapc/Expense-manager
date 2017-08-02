@@ -1,14 +1,21 @@
-<div class="panel panel-danger">
-  <div class="panel-heading">Payment Modes </div>
-  <div class="panel-body">
-  <%= form_for (@paymentmode) do |f| %>
-	<div class="form-group">
-	<%= f.label :payment_gateway %>
-    <%= f.text_field  :payment_gateway ,:class => 'form-control',:id => 'paymentgateway' %>
+<div class="col-xs-12">
+  <div class="card">
+    <div class="header">
+      <h2>Payment Modes</h2>
     </div>
-	
-	<button type="save" class="btn btn-success btn-cons">Save</button>
-    <%= link_to 'Cancel', payment_modes_path, :class => "btn btn-danger btn-cons" %>
-	<% end %>
+    <div class="body">
+    <%= form_for (@paymentmode), html: {id: "payment_mode_form"} do |f| %>
+        <div class="form-group">
+          <div class="form-line">
+          <%= f.label :payment_gateway %>
+          <%= f.text_field :payment_gateway, :class => 'form-control required', :id => 'paymentgateway' %>
+          </div>
+        </div>
+        <button type="save" class="btn btn-success btn-cons">Save</button>
+        <%= link_to 'Cancel', payment_modes_path, :class => "btn btn-danger btn-cons" %>
+    <% end %>
+    </div>
   </div>
 </div>
+
+

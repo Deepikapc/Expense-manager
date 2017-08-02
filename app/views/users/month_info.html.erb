@@ -1,60 +1,62 @@
-  <div class="panel panel-danger">
-    <div class="panel-heading">Month Info</div>
-    <div class="panel-body">
-  <%= form_tag(month_info_path) do %>
+<div class="col-xs-12">
+  <div class="card">
+    <div class="header">Month Info</div>
+    <div class="body">
+      <%= form_tag(month_info_path) do %>
           <div class="container-fluid">
             <div class="row">
-              <div class="col-sm-3" >
+              <div class="col-sm-3">
                 <p>
                   Date
                   <%= text_field_tag 'date', nil, :id => 'daily_detail_date' %>
                 </p>
               </div>
-              <div class="col-sm-3" >
+              <div class="col-sm-3">
                 <p>
                   User
-                  <%=select_tag 'user_id', options_for_select(@users.collect{ |u| [u.name, u.id] })%>
+                  <%= select_tag 'user_id', options_for_select(@users.collect {|u| [u.name, u.id]}) %>
                 </p>
               </div>
-              <div class="col-sm-3" >
+              <div class="col-sm-3">
                 <p>
-                  <%= submit_tag("Submit") %>
+                  <%= submit_tag("Submit", class: "btn btn-primary waves-effect") %>
                 </p>
               </div>
             </div>
           </div>
-  <% end %>
+      <% end %>
     </div>
   </div>
-  <div class="panel panel-info">
-    <div class="panel-heading">Results</div>
-    <div class="panel-body">
-   <table class="table table-bordered">
-      <thead>
-      <tr>
-        <th> username </th>
+  <div class="card">
+    <div class="header">Results</div>
+    <div class="body table-responsive">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th> username</th>
           <td><%= @user.name %></td>
-      </tr>
-      <tr>
-        <th> From Date </th>
-          <td><%= @start_date%></td>
-      </tr>
-      <tr>
-        <th> To Date </th>
+        </tr>
+        <tr>
+          <th> From Date</th>
+          <td><%= @start_date %></td>
+        </tr>
+        <tr>
+          <th> To Date</th>
           <td><%= @end_date %></td>
-      </tr>
-      <tr>
-        <th> Total Amount </th>
+        </tr>
+        <tr>
+          <th> Total Amount</th>
           <td><%= @total %></td>
-      </tr>
-      </thead>
-    </table>
+        </tr>
+        </thead>
+      </table>
 
-  <%= link_to 'PayNow', new_user_payment_path, :class => "btn btn-danger btn-cons" %>
+      <%= link_to 'PayNow', new_user_payment_path, :class => "btn btn-danger btn-cons" %>
     </div>
   </div>
-  <script type="text/javascript">
-      $(document).ready(function() {
-          $("#daily_detail_date").datepicker({dateFormat: "yy-mm-dd"});
-      });
-  </script>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#daily_detail_date").datepicker({dateFormat: "yy-mm-dd"});
+    });
+</script>

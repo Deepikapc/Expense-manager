@@ -1,8 +1,14 @@
-<p>
-	  <strong>payment_gateway:</strong>
-	  <%= @paymentmode.name %>
-	</p>
-	<p>
-
-	<%= link_to 'Back', payment_modes_path %>
-	</p>
+<div class="col-xs-12">
+  <div class="card">
+    <div class="header">
+      <h1>PaymentMode Details</h1>
+    </div>
+    <div class="body">
+      <p>
+        <strong>payment_gateway:</strong>
+        <%= @paymentmode.payment_gateway %>
+      </p>
+      <p><%= link_to 'Back', payment_modes_path, class: "btn btn-danger btn-cons" %></p>
+    </div>
+  </div>
+</div>

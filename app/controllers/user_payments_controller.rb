@@ -1,31 +1,55 @@
-  class UserPaymentsController < ApplicationController
-    def index
-    @userpayments=UserPayment.all
+class UserPaymentsController < ApplicationController
+
+  #
+  # index
+  #
+  def index
+    @userpayments = UserPayment.all
   end
-    def new
-    @userpayment=UserPayment.new
-    @users=User.all
-    @paymentmodes=PaymentMode.all
+
+  #
+  # new
+  #
+  def new
+    @userpayment = UserPayment.new
+    @users = User.all
+    @paymentmodes = PaymentMode.all
   end
+
+  #
+  # create
+  #
   def create
-     @userpayment=UserPayment.new(user_payment_params)
+    @userpayment = UserPayment.new(user_payment_params)
     if @userpayment.save
       redirect_to :action => :index
     else
       render 'new'
-      end
+    end
   end
+
+  #
+  # show
+  #
   def show
-     @userpayment=UserPayment.find(params[:id])
+    @userpayment = UserPayment.find(params[:id])
   end
+
+  #
+  # destroy
+  #
   def destroy
-       @userpayment=UserPayment.find(params[:id])
-       @userpayment.destroy
-       redirect_to user_payments_path
-     end
+    @userpayment = UserPayment.find(params[:id])
+    @userpayment.destroy
+    redirect_to user_payments_path
+  end
 
   private
-        def user_payment_params
-          params.require(:user_payment).permit(:user_id ,:amount_paid,:date, :comment,:payment_mode_id )
-        end
+
+  #
+  # user_payment_params
+  #
+  def user_payment_params
+    params.require(:user_payment).permit(:user_id, :amount_paid, :date, :comment, :payment_mode_id)
   end
+end
